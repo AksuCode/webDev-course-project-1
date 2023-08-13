@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shared shopping lists</title>
+  </head>
+  <body>
+    <a href="http://localhost:7777/lists">Lists</a>
+  </body>
+</html>
