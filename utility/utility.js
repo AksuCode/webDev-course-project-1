@@ -1,7 +1,7 @@
-import { configure } from "../deps";
+import { configure } from "../deps.js";
 
 configure({
-  views: `${Deno.cwd()}/../views/`,
+  views: `${Deno.cwd()}/views/`,
 });
 
 const responseDetails = {

@@ -1,10 +1,10 @@
-import { renderFile, serve } from "./deps";
-import { redirectTo, responseDetails } from "./utility/utility";
-import * as shopping_lists_Service from "../services/shopping_lists_Service";
+import { renderFile, serve } from "../deps.js";
+import { redirectTo, responseDetails } from "../utility/utility.js";
+import * as shopping_lists_Service from "../services/shopping_lists_Service.js";
 
 const addShoppinglist = async (request) => {
-    const url = new URL(request.url);
-    await shopping_lists_Service.createShoppinglist(url.searchParams("name"));
+    const formdat = await request.formData();
+    await shopping_lists_Service.createShoppinglist(formdat.get("name"));
 
     return redirectTo("/lists");
 }

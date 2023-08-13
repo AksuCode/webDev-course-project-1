@@ -1,7 +1,7 @@
-import { renderFile, serve } from "./deps";
-import { redirectTo, responseDetails } from "./utility/utility";
-import * as listsControllers from "./controllers/shopping_lists_Controller";
-import * as listItemControllers from "./controllers/shopping_list_items_Controller";
+import { renderFile, serve } from "./deps.js";
+import { redirectTo, responseDetails } from "./utility/utility.js";
+import * as listsControllers from "./controllers/shopping_lists_Controller.js";
+import * as listItemControllers from "./controllers/shopping_list_items_Controller.js";
 
 
 const handleRequest = async (request) => {
@@ -14,11 +14,11 @@ const handleRequest = async (request) => {
     return new Response(await renderFile("main.eta"), responseDetails);
   }
 
-  else if (mehtod === "GET" && path === "/lists") {
+  else if (method === "GET" && path === "/lists") {
     return await listsControllers.lookupShoppinglists();
   }
 
-  else if (mehtod === "POST" && path === "/lists") {
+  else if (method === "POST" && path === "/lists") {
     return await listsControllers.addShoppinglist(request);
   }
 

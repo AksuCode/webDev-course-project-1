@@ -1,2 +1,2 @@
-import { renderFile, serve } from "./deps";
-import { redirectTo, responseDetails } from "./utility/utility";
+import { renderFile, serve } from "../deps.js";
+import { redirectTo, responseDetails } from "../utility/utility.js";

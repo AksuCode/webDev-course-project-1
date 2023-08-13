@@ -1,4 +1,4 @@
-import sql from "../database/database";
+import { sql } from "../database/database.js";
 
 const createShoppinglist = async (name) => {
     await sql`INSERT INTO shopping_lists (name) VALUES (${name})`;
