@@ -10,7 +10,7 @@ const handleRequest = async (request) => {
   const method = request.method;
   const url = new URL(request.url);
   const path = url.pathname;
-
+  
   if (path === "/") {
     return new Response(await renderFile("main.eta"), responseDetails);
   }
@@ -32,7 +32,7 @@ const handleRequest = async (request) => {
   }
 
   else {
-    redirectTo("/");
+    return redirectTo("/");
   }
 
 
