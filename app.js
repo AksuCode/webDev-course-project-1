@@ -10,6 +10,8 @@ const handleRequest = async (request) => {
   const method = request.method;
   const path = (new URL(request.url)).pathname;
 
+  console.log(method);
+  console.log(path);
   
   if (path === "/") {
     return new Response(await renderFile("main.eta"), responseDetails);
@@ -27,8 +29,12 @@ const handleRequest = async (request) => {
     return await listsControllers.deactivateList(request);
   }
 
-  else if (false) {
+  else if (method === "GET" && (path.match("/lists/[0-9]+") !== null)) {
+    return await listItemControllers.lookupListItems(request);
+  }
 
+  else if (method === "POST" && (path.match("/lists/[0-9]+/items") !== null)) {
+    return await listItemControllers.addListItems(request);
   }
 
   else {

@@ -1,1 +1,25 @@
 <% layout("./layouts/layout.eta") %>
+
+<a href="http://localhost:7777/lists">Shopping lists</a>
+<h1>List items:</h1>
+
+<h2>Add a new item</h2>
+
+<form method="POST" action="<%= it.path %>/items">
+    <input type="text" name="name" />
+    <input type="submit" value="Add new item!" />
+</form>
+<p>Empty form or duplicates not accepted.</p>
+
+
+<h2>Items:</h2>
+
+<ul>
+    <% it.items.forEach( (obj) => { %>
+        <% if (!obj.collected) {%>
+            <li><%= obj.name %> <form action="/lists/<%= obj.shopping_list_id %>/items/<%= obj.id %>/collect" method="POST"><input type="submit" value="Mark collected!"></form></li>
+        <% } else { %>
+            <li><del><%= obj.name %></del> <form action="/lists/<%= obj.shopping_list_id %>/items/<%= obj.id %>/collect" method="POST"><input type="submit" value="Mark collected!"></form></li>
+        <% } %>
+    <% }); %>
+</ul>
