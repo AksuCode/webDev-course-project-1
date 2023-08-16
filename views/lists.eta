@@ -1,5 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
+<a href="http://localhost:7777">Main page</a>
 <h1>Shopping lists:</h1>
 
 <h2>Add new shoppping list</h2>
@@ -8,12 +9,13 @@
     <input type="text" name="name" />
     <input type="submit" value="Create shopping list!" />
 </form>
+<p>Empty form or duplicate lists not accepted.</p>
 
 
 <h2>Active shopping lists:</h2>
 
 <ul>
     <% it.lists.forEach( (obj) => { %>
-        <li><%= obj.name %></li>
+        <li><a href="http://localhost:7777/lists/<%= obj.id %>"><%= obj.name %></a> <form action="/lists/<%= obj.id %>/deactivate" method="POST"><input type="submit" value="Deactivate list!"></form></li> 
     <% }); %>
 </ul>

@@ -1,13 +1,21 @@
-import { renderFile, serve } from "../deps.js";
+import { renderFile } from "../deps.js";
 import { redirectTo, responseDetails } from "../utility/utility.js";
 import * as shopping_lists_Service from "../services/shopping_lists_Service.js";
 
+
+
 const addShoppinglist = async (request) => {
-    const formdat = await request.formData();
-    await shopping_lists_Service.createShoppinglist(formdat.get("name"));
+    const listName  = (await request.formData()).get("name");
+
+    if (!listName) return redirectTo("/lists");
+    if (await shopping_lists_Service.listCount(listName) >= 1) return redirectTo("/lists");
+
+    await shopping_lists_Service.createShoppinglist(listName);
 
     return redirectTo("/lists");
 }
+
+
 
 const lookupShoppinglists = async () => {
 
@@ -18,4 +26,14 @@ const lookupShoppinglists = async () => {
     return new Response(await renderFile("lists.eta", dat), responseDetails);
 }
 
-export { addShoppinglist, lookupShoppinglists }
+
+
+const deactivateList = async (request) => {
+    const id = Number(((new URL(request.url)).pathname.split("/"))[2]);
+    await shopping_lists_Service.listMarkListActiveAsFalse(id);
+    return redirectTo("/lists");
+}
+
+
+
+export { addShoppinglist, lookupShoppinglists, deactivateList }

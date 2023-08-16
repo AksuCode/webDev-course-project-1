@@ -8,8 +8,8 @@ import * as listItemControllers from "./controllers/shopping_list_items_Controll
 const handleRequest = async (request) => {
 
   const method = request.method;
-  const url = new URL(request.url);
-  const path = url.pathname;
+  const path = (new URL(request.url)).pathname;
+
   
   if (path === "/") {
     return new Response(await renderFile("main.eta"), responseDetails);
@@ -23,8 +23,8 @@ const handleRequest = async (request) => {
     return await listsControllers.addShoppinglist(request);
   }
 
-  else if (false) {
-
+  else if (method === "POST" && (path.match("/lists/[0-9]+/deactivate") !== null)) {
+    return await listsControllers.deactivateList(request);
   }
 
   else if (false) {
