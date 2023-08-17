@@ -8,7 +8,7 @@ const addShoppinglist = async (request) => {
     const listName  = (await request.formData()).get("name");
 
     if (!listName) return redirectTo("/lists");
-    if (await shopping_lists_Service.listCount(listName) >= 1) return redirectTo("/lists");
+    if (await shopping_lists_Service.listExists(listName)) return redirectTo("/lists");
 
     await shopping_lists_Service.createShoppinglist(listName);
 
@@ -36,4 +36,10 @@ const deactivateList = async (request) => {
 
 
 
-export { addShoppinglist, lookupShoppinglists, deactivateList }
+const allListCount = async () => {
+    return await shopping_lists_Service.listCount();
+}
+
+
+
+export { addShoppinglist, lookupShoppinglists, deactivateList, allListCount }

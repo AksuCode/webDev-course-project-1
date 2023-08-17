@@ -8,21 +8,28 @@ const findAllListItems = async (id) => {
 
 
 
-const createListItem = async (name) => {
-    await sql`INSERT INTO shopping_list_items (name) VALUES (${name})`;
+const createListItem = async (listId, name) => {
+    await sql`INSERT INTO shopping_list_items (name, shopping_list_id) VALUES (${name}, ${listId})`;
 }
 
 
 
-const itemCount = async (name) => {
-    return (await sql`SELECT COUNT(*) FROM shopping_list_items WHERE name = ${name}`)[0].count;
+const itemExists = async (listId, name) => {
+    return (await sql`SELECT COUNT(*) FROM shopping_list_items WHERE shopping_list_id = ${listId} AND name = ${name}`)[0].count >= 1;
 }
+
+
+
+const itemCount = async () => {
+    return (await sql`SELECT COUNT(*) FROM shopping_list_items`)[0].count;
+}
+
 
 
 const markListItemsAsCollected = async (id) => {
-    await sql`UPDATE shopping_list_items SET collected = false WHERE id = ${id}`;
+    await sql`UPDATE shopping_list_items SET collected = true WHERE id = ${id}`;
 }
 
 
 
-export { findAllListItems, createListItem, itemCount, markListItemsAsCollected }
+export { findAllListItems, createListItem, itemExists, markListItemsAsCollected, itemCount }

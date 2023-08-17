@@ -4,3 +4,12 @@
     <a href="http://localhost:7777/lists">Lists</a>
   </body>
 </html>
+
+<h1>Statistics:</h1>
+
+<% if ( it.stats[0] === 0) { %>
+  <p>No shopping lists yet.</p>
+<% } else { %>
+  <li>Shopping lists: <%= it.stats[0] %></li>
+  <li>Shopping list items: <%= it.stats[1] %></li>
+<% } %>

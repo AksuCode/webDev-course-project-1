@@ -19,12 +19,13 @@ const lookupListItems = async (request) => {
 
 const addListItems = async (request) => {
     const itemName  = (await request.formData()).get("name");
-    const path = `../${(new URL(request.url)).pathname}`;
+    const listId = Number((new URL(request.url)).pathname.split("/")[2]);
+    const path = `../${listId}`;
 
     if (!itemName) return redirectTo(path);
-    if (await shopping_list_items_Service.itemCount(itemName) >= 1) return redirectTo(path);
+    if (await shopping_list_items_Service.itemExists(listId, itemName)) return redirectTo(path);
 
-    await shopping_list_items_Service.createListItem(itemName);
+    await shopping_list_items_Service.createListItem(listId, itemName);
 
     return redirectTo(path);
 }
@@ -33,7 +34,7 @@ const addListItems = async (request) => {
 
 const collectItem = async (request) => {
     const id = Number(((new URL(request.url)).pathname.split("/"))[4]);
-    const path = (new URL(request.url)).pathname;
+    const path = `../../../${((new URL(request.url)).pathname.split("/"))[2]}`;
 
     await shopping_list_items_Service.markListItemsAsCollected(id);
     return redirectTo(path);
@@ -41,4 +42,10 @@ const collectItem = async (request) => {
 
 
 
-export { lookupListItems, addListItems, collectItem }
+const allItemCount = async (request) => {
+    return await shopping_list_items_Service.itemCount();
+}
+
+
+
+export { lookupListItems, addListItems, collectItem, allItemCount }

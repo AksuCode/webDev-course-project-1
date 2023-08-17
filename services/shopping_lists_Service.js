@@ -14,8 +14,14 @@ const findAllActiveShoppinglists = async () => {
 
 
 
-const listCount = async (name) => {
-    return (await sql`SELECT COUNT(*) FROM shopping_lists WHERE name = ${name}`)[0].count;
+const listExists = async (name) => {
+    return (await sql`SELECT COUNT(*) FROM shopping_lists WHERE name = ${name}`)[0].count >= 1;
+}
+
+
+
+const listCount = async () => {
+    return (await sql`SELECT COUNT(*) FROM shopping_lists`)[0].count;
 }
  
 
@@ -26,4 +32,4 @@ const listMarkListActiveAsFalse = async (id) => {
 
 
 
-export { createShoppinglist, findAllActiveShoppinglists, listCount, listMarkListActiveAsFalse }
+export { createShoppinglist, findAllActiveShoppinglists, listCount, listMarkListActiveAsFalse, listExists }

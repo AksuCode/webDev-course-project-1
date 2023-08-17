@@ -16,6 +16,6 @@
 
 <ul>
     <% it.lists.forEach( (obj) => { %>
-        <li><a href="http://localhost:7777/lists/<%= obj.id %>"><%= obj.name %></a> <form action="/lists/<%= obj.id %>/deactivate" method="POST"><input type="submit" value="Deactivate list!"></form></li> 
+        <li><form action="/lists/<%= obj.id %>/deactivate" method="POST"><a href="http://localhost:7777/lists/<%= obj.id %>"><%= obj.name %></a><input type="submit" value="Deactivate list!"></form></li> 
     <% }); %>
 </ul>
