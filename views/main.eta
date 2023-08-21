@@ -7,7 +7,7 @@
 
 <h1>Statistics:</h1>
 
-<% if ( it.stats[0] === 0) { %>
+<% if ( it.stats[0] === "0") { %>
   <p>No shopping lists yet.</p>
 <% } else { %>
   <li>Shopping lists: <%= it.stats[0] %></li>
