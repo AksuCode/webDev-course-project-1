@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <a href="http://localhost:7777/lists">Lists</a>
+    <a href="/lists">Lists</a>
   </body>
 </html>
 

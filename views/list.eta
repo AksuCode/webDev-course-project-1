@@ -1,6 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
-<a href="http://localhost:7777/lists">Shopping lists</a>
+<a href="/lists">Shopping lists</a>
 <h1>List items:</h1>
 
 <h2>Add a new item</h2>
