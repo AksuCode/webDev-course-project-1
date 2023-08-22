@@ -14,8 +14,8 @@ const createListItem = async (listId, name) => {
 
 
 
-const itemExists = async (listId, name) => {
-    return (await sql`SELECT COUNT(*) FROM shopping_list_items WHERE shopping_list_id = ${listId} AND name = ${name}`)[0].count >= 1;
+const collectedItemExists = async (listId, name) => {
+    return (await sql`SELECT COUNT(*) FROM shopping_list_items WHERE shopping_list_id = ${listId} AND collected = false AND name = ${name}`)[0].count >= 1;
 }
 
 
@@ -32,4 +32,4 @@ const markListItemsAsCollected = async (id) => {
 
 
 
-export { findAllListItems, createListItem, itemExists, markListItemsAsCollected, itemCount }
+export { findAllListItems, createListItem, collectedItemExists, markListItemsAsCollected, itemCount }

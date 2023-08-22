@@ -7,8 +7,8 @@ import * as shopping_lists_Service from "../services/shopping_lists_Service.js";
 const addShoppinglist = async (request) => {
     const listName  = (await request.formData()).get("name");
 
-    if (!listName) return redirectTo("/lists");
-    if (await shopping_lists_Service.listExists(listName)) return redirectTo("/lists");
+    if (!listName || !/\S/.test(listName)) return redirectTo("/lists");
+    if (await shopping_lists_Service.activeListExists(listName)) return redirectTo("/lists");
 
     await shopping_lists_Service.createShoppinglist(listName);
 

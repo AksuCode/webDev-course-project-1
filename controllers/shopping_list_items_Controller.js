@@ -22,8 +22,8 @@ const addListItems = async (request) => {
     const listId = Number((new URL(request.url)).pathname.split("/")[2]);
     const path = `../${listId}`;
 
-    if (!itemName) return redirectTo(path);
-    if (await shopping_list_items_Service.itemExists(listId, itemName)) return redirectTo(path);
+    if (!itemName || !/\S/.test(itemName)) return redirectTo(path);
+    if (await shopping_list_items_Service.collectedItemExists(listId, itemName)) return redirectTo(path);
 
     await shopping_list_items_Service.createListItem(listId, itemName);
 

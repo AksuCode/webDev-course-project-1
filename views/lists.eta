@@ -9,13 +9,13 @@
     <input type="text" name="name" />
     <input type="submit" value="Create shopping list!" />
 </form>
-<p>Empty form or duplicate lists not accepted.</p>
+<p>Empty form or active duplicates not accepted.</p>
 
 
 <h2>Active shopping lists:</h2>
 
 <ul>
     <% it.lists.forEach( (obj) => { %>
-        <li><form action="/lists/<%= obj.id %>/deactivate" method="POST"><a href="http://localhost:7777/lists/<%= obj.id %>"><%= obj.name %></a><input type="submit" value="Deactivate list!"></form></li> 
+        <li><form action="/lists/<%= obj.id %>/deactivate" method="POST"><a href="/lists/<%= obj.id %>"><%= obj.name %></a><input type="submit" value="Deactivate list!"></form></li> 
     <% }); %>
 </ul>
