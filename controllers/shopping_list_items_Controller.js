@@ -1,7 +1,7 @@
 import { renderFile } from "../deps.js";
 import { redirectTo, responseDetails } from "../utility/utility.js";
 import * as shopping_list_items_Service from "../services/shopping_list_items_Service.js";
-
+import { findListWithId } from "../services/shopping_lists_Service.js";
 
 
 const lookupListItems = async (request) => {
@@ -10,6 +10,7 @@ const lookupListItems = async (request) => {
     const dat = {
         items: await shopping_list_items_Service.findAllListItems(id),
         path:(new URL(request.url)).pathname,
+        name: (await findListWithId(id))[0].name, 
     }
 
     return new Response(await renderFile("list.eta", dat), responseDetails);

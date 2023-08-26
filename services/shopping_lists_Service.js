@@ -30,6 +30,8 @@ const listMarkListActiveAsFalse = async (id) => {
     await sql`UPDATE shopping_lists SET active = false WHERE id = ${id}`;
 }
 
+const findListWithId = async (id) => {
+    return await sql`SELECT * FROM shopping_lists WHERE id = ${id}`;
+}
 
-
-export { createShoppinglist, findAllActiveShoppinglists, listCount, listMarkListActiveAsFalse, activeListExists }
+export { createShoppinglist, findAllActiveShoppinglists, listCount, listMarkListActiveAsFalse, activeListExists, findListWithId }
